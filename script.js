@@ -12,6 +12,13 @@ window.addEventListener("load", function() {
    let copilotName = document.querySelector("input[name=copilotName]");
    let fuelLevel = document.querySelector("input[name=fuelLevel]");
    let cargoMass = document.querySelector("input[name=cargoMass]");
+   let faultyItems = document.getElementById("faultyItems");
+   let pilotStatus = document.getElementById("pilotStatus");
+   let copilotStatus = document.getElementById("copilotStatus");
+   let fuelStatus = document.getElementById("fuelStatus");
+   let cargoStatus = document.getElementById("cargoStatus");
+   let launchStatus = document.getElementById("launchStatus");
+   
    if(pilotName.value === "" || copilotName.value === "" || fuelLevel.value === "" || cargoMass.value === ""){
     alert('one or more fields are blank')
     event.preventDefault();
@@ -21,7 +28,35 @@ window.addEventListener("load", function() {
    }else if(isNaN(fuelLevel.value) || isNaN(cargoMass.value)){
     alert('please enter a valid number')
     event.preventDefault();
-   }
+   }else{
+       pilotStatus.innerHTML = `Pilot ${pilotName.value} is ready.`
+       
+       copilotStatus.innerHTML = `Copilot ${copilotName.value} is ready.`
+       faultyItems.style.visibility = "visible"
+       if(fuelLevel.value < 10000) {
+           faultyItems.style.visibility = "visible";
+           fuelStatus.innerHTML = "Fuel level is too low"  
+       }else{
+           faultyItems.style.visibility = "visible"
+           fuelStatus.innerHTML = "Fuel levels are green"
+       }
+       if(cargoMass.value > 10000){
+        faultyItems.style.visibility = "visible";
+        cargoStatus.innerHTML = "Cargo mass too large"
+       }else{
+           cargoStatus.innerHTML = "Mass is stable"
+       }
+       if(cargoMass.value > 10000 || fuelLevel.value < 10000){
+        faultyItems.style.visibility = "visible";
+        launchStatus.style.color = "red"
+        launchStatus.innerHTML = "Shuttle is not ready"
+       }else{
+           
+        launchStatus.style.color = "green"
+        launchStatus.innerHTML = "Shuttle is good to go"
+       }
+       event.preventDefault();
+    }
    })
    
 

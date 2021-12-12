@@ -11,7 +11,6 @@ window.addEventListener("load", function () {
 
     fetch("https://handlers.education.launchcode.org/static/planets.json").then( function(response) {
         response.json().then(function(json){
-            console.log(json[0])
             let index = Math.floor(Math.random() * (json.length - 1))
             let missionTarget = document.getElementById("missionTarget");
             missionTarget.innerHTML = `
@@ -77,7 +76,7 @@ window.addEventListener("load", function () {
                 launchStatus.style.color = "green"
                 launchStatus.innerHTML = "Shuttle is good to go"
             }
-            myFetch();
+            // myFetch();
             event.preventDefault();
         }
     })
